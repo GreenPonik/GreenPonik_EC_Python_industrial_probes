@@ -1,4 +1,2 @@
-!libs/__init__.py
 libs/*
-
 *.pyc
