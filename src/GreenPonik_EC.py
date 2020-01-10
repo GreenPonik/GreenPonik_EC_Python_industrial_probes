@@ -71,7 +71,7 @@ class GreenPonik_EC():
         rawEC = 1000*voltage/820.0/200.0
         print(">>>current rawEC is: %.3f" % rawEC)
         # automated 1.413 buffer solution dection
-        if (rawEC > _raw_1413-_raw_1413_offset and rawEC < _raw_1413-_raw_1413_offset):
+        if (rawEC > _raw_1413-_raw_1413_offset and rawEC < _raw_1413+_raw_1413_offset):
             compECsolution = 1.413*(1.0+0.0185*(temperature-25.0))
             KValueTemp = self.KvalueTempCalculation(compECsolution, voltage)
             round(KValueTemp, 2)
@@ -90,7 +90,7 @@ class GreenPonik_EC():
                        'status_message': status_msg}
             return cal_res
         # automated 2.76 buffer solution dection
-       elif (rawEC > _raw_276-_raw_276_offset_low and rawEC < _raw_276-_raw_276_offset_high):
+        elif (rawEC > _raw_276-_raw_276_offset_low and rawEC < _raw_276+_raw_276_offset_high):
             compECsolution = 2.76*(1.0+0.0185*(temperature-25.0))
             KValueTemp = self.KvalueTempCalculation(compECsolution, voltage)
             round(KValueTemp, 2)
@@ -109,7 +109,7 @@ class GreenPonik_EC():
                        'status_message': status_msg}
             return cal_res
         # automated 12.88 buffer solution dection
-        elif (rawEC > _raw_1288-_raw_1288_offset and rawEC < _raw_1288-_raw_1288_offset):
+        elif (rawEC > _raw_1288-_raw_1288_offset and rawEC < _raw_1288+_raw_1288_offset):
             compECsolution = 12.88*(1.0+0.0185*(temperature-25.0))
             KValueTemp = self.KvalueTempCalculation(compECsolution, voltage)
             print(">>>Buffer Solution:12.88ms/cm")
