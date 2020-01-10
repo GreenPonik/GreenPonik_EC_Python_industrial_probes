@@ -25,7 +25,7 @@ _voltage = 0.0
 _temperature = 25.0
 
 _raw_1413 = 1.200
-_raw_1413_offset = 0.400
+_raw_1413_offset = 0.750
 _raw_276 = 2.500
 _raw_276_offset_low = 0.500
 _raw_276_offset_high = 1.000
