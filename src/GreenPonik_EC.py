@@ -82,7 +82,7 @@ class GreenPonik_EC():
             f = open('ecdata.txt', 'w+')
             f.writelines(flist)
             f.close()
-            status_msg = ">>>EC:1.413us/cm Calibration completed<<<""
+            status_msg = ">>>EC:1.413us/cm Calibration completed<<<"
             print(status_msg)
             time.sleep(5.0)
             cal_res = {'status': 1413,
@@ -101,7 +101,7 @@ class GreenPonik_EC():
             f = open('ecdata.txt', 'w+')
             f.writelines(flist)
             f.close()
-            status_msg = ">>>EC:2.76ms/cm Calibration completed<<<""
+            status_msg = ">>>EC:2.76ms/cm Calibration completed<<<"
             print(status_msg)
             time.sleep(5.0)
             cal_res = {'status': 276,
@@ -119,7 +119,7 @@ class GreenPonik_EC():
             f = open('ecdata.txt', 'w+')
             f.writelines(flist)
             f.close()
-            status_msg = ">>>EC:12.88ms/cm Calibration completed<<<""
+            status_msg = ">>>EC:12.88ms/cm Calibration completed<<<"
             print(status_msg)
             time.sleep(5.0)
             cal_res = {'status': 1288,
