@@ -13,9 +13,7 @@ https://github.com/GreenPonik/GreenPonik_EC_Python
 Need DFRobot_ADS1115 library
 https://github.com/DFRobot/DFRobot_ADS1115/tree/master/RaspberryPi/Python
 """
-
 import time
-import sys
 
 _kvalue = 1.0
 _kvalueLow = 1.0
@@ -38,13 +36,16 @@ class GreenPonik_EC():
         global _kvalueLow
         global _kvalueHigh
         try:
+            print(">>>Initialization of ec lib<<<")
             with open('ecdata.txt', 'r') as f:
                 kvalueLowLine = f.readline()
                 kvalueLowLine = kvalueLowLine.strip('kvalueLow=')
                 _kvalueLow = float(kvalueLowLine)
+                print("get k value low from txt file: %.3f" % _kvalueLow)
                 kvalueHighLine = f.readline()
                 kvalueHighLine = kvalueHighLine.strip('kvalueHigh=')
                 _kvalueHigh = float(kvalueHighLine)
+                print("get k value high from txt file: %.3f" % _kvalueHigh)
         except:
             self.reset()
             pass
@@ -133,9 +134,13 @@ class GreenPonik_EC():
             return cal_res
 
     def reset(self):
+        global _kvalueLow
+        global _kvalueHigh
         _kvalueLow = 1.0
         _kvalueHigh = 1.0
+        print(">>>Reset to default parameters<<<")
         try:
+            print(">>>Read k from txt files<<<")
             f = open('ecdata.txt', 'r+')
             flist = f.readlines()
             flist[0] = 'kvalueLow=' + str(_kvalueLow) + '\n'
@@ -143,11 +148,11 @@ class GreenPonik_EC():
             f = open('ecdata.txt', 'w+')
             f.writelines(flist)
             f.close()
-            print(">>>Reset to default parameters<<<")
         except:
+            print(">>>Cannot read k from txt files<<<")
+            print(">>>Let's create them and apply the default values<<<")
             f = open('ecdata.txt', 'w')
             flist = 'kvalueLow=' + str(_kvalueLow) + '\n'
             flist += 'kvalueHigh=' + str(_kvalueHigh) + '\n'
             f.writelines(flist)
             f.close()
-            print(">>>Reset to default parameters<<<")
