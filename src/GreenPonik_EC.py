@@ -18,7 +18,6 @@ import time
 _kvalue = 1.0
 _kvalueLow = 1.0
 _kvalueHigh = 1.0
-_cmdReceivedBufferIndex = 0
 _voltage = 0.0
 _temperature = 25.0
 
