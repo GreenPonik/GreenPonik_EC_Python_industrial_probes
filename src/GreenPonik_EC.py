@@ -30,13 +30,16 @@ _raw_1288 = 11.850
 _raw_1288_offset = 3.650
 
 
+TXT_FILE_PATH = "/home/greenponik/bundle_project_raspberry_core/"
+
+
 class GreenPonik_EC():
     def begin(self):
         global _kvalueLow
         global _kvalueHigh
         try:
             print(">>>Initialization of ec lib<<<")
-            with open('ecdata.txt', 'r') as f:
+            with open('%secdata.txt' % TXT_FILE_PATH, 'r') as f:
                 kvalueLowLine = f.readline()
                 kvalueLowLine = kvalueLowLine.strip('kvalueLow=')
                 _kvalueLow = float(kvalueLowLine)
@@ -76,10 +79,10 @@ class GreenPonik_EC():
             KValueTemp = self.KvalueTempCalculation(compECsolution, voltage)
             round(KValueTemp, 2)
             print(">>>Buffer Solution:1.413us/cm")
-            f = open('ecdata.txt', 'r+')
+            f = open('%secdata.txt' % TXT_FILE_PATH, 'r+')
             flist = f.readlines()
             flist[0] = 'kvalueLow=' + str(KValueTemp) + '\n'
-            f = open('ecdata.txt', 'w+')
+            f = open('%secdata.txt' % TXT_FILE_PATH, 'w+')
             f.writelines(flist)
             f.close()
             status_msg = ">>>EC:1.413us/cm Calibration completed<<<"
@@ -95,10 +98,10 @@ class GreenPonik_EC():
             KValueTemp = self.KvalueTempCalculation(compECsolution, voltage)
             round(KValueTemp, 2)
             print(">>>Buffer Solution:2.76ms/cm")
-            f = open('ecdata.txt', 'r+')
+            f = open('%secdata.txt' % TXT_FILE_PATH, 'r+')
             flist = f.readlines()
             flist[1] = 'kvalueHigh=' + str(KValueTemp) + '\n'
-            f = open('ecdata.txt', 'w+')
+            f = open('%secdata.txt' % TXT_FILE_PATH, 'w+')
             f.writelines(flist)
             f.close()
             status_msg = ">>>EC:2.76ms/cm Calibration completed<<<"
@@ -113,10 +116,10 @@ class GreenPonik_EC():
             compECsolution = 12.88*(1.0+0.0185*(temperature-25.0))
             KValueTemp = self.KvalueTempCalculation(compECsolution, voltage)
             print(">>>Buffer Solution:12.88ms/cm")
-            f = open('ecdata.txt', 'r+')
+            f = open('%secdata.txt' % TXT_FILE_PATH, 'r+')
             flist = f.readlines()
             flist[1] = 'kvalueHigh=' + str(KValueTemp) + '\n'
-            f = open('ecdata.txt', 'w+')
+            f = open('%secdata.txt' % TXT_FILE_PATH, 'w+')
             f.writelines(flist)
             f.close()
             status_msg = ">>>EC:12.88ms/cm Calibration completed<<<"
@@ -140,17 +143,17 @@ class GreenPonik_EC():
         print(">>>Reset to default parameters<<<")
         try:
             print(">>>Read k from txt files<<<")
-            f = open('ecdata.txt', 'r+')
+            f = open('%secdata.txt' % TXT_FILE_PATH, 'r+')
             flist = f.readlines()
             flist[0] = 'kvalueLow=' + str(_kvalueLow) + '\n'
             flist[1] = 'kvalueHigh=' + str(_kvalueHigh) + '\n'
-            f = open('ecdata.txt', 'w+')
+            f = open('%secdata.txt' % TXT_FILE_PATH, 'w+')
             f.writelines(flist)
             f.close()
         except:
             print(">>>Cannot read k from txt files<<<")
             print(">>>Let's create them and apply the default values<<<")
-            f = open('ecdata.txt', 'w')
+            f = open('%secdata.txt' % TXT_FILE_PATH, 'w')
             flist = 'kvalueLow=' + str(_kvalueLow) + '\n'
             flist += 'kvalueHigh=' + str(_kvalueHigh) + '\n'
             f.writelines(flist)
