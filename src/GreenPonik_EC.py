@@ -29,7 +29,6 @@ _raw_276_offset_high = 1.000
 _raw_1288 = 11.850
 _raw_1288_offset = 3.650
 
-
 TXT_FILE_PATH = "/home/greenponik/bundle_project_raspberry_core/"
 
 
@@ -60,12 +59,21 @@ class GreenPonik_EC():
         print(">>>current voltage is: %.3f mV" % voltage)
         print(">>>current rawEC is: %.3f" % rawEC)
         valueTemp = rawEC * _kvalue
-        if(valueTemp > 2.5):
+        if(valueTemp > 2.76):
             _kvalue = _kvalueHigh
-        elif (valueTemp >= 1.6 and valueTemp <= 2.5):
-            _kvalue = (_kvalueHigh+_kvalueLow)/2
-        elif(valueTemp < 1.6):
+        elif(valueTemp < 1.413):
             _kvalue = _kvalueLow
+        else:
+            print(">>>interpolation of k")
+            # a = (Y2-Y1)/(X2-X1)
+            slope = (_kvalueHigh+_kvalueLow) / (2.76-1.413)
+            print(">>>slope: %.5f" % slope)
+            # b = Y1 - (a*X1)
+            intercept = _kvalueLow - (slope*1.413)
+            print(">>>intercept: %.5f" % intercept)
+            # y = ax+b
+            _kvalue = (slope*valueTemp)+intercept
+            print(">>>interpolated _kvalue: %.5f" % _kvalue)
         value = rawEC * _kvalue
         value = value / (1.0+0.0185*(temperature-25.0))
         return value
@@ -115,23 +123,23 @@ class GreenPonik_EC():
                        'status_message': status_msg}
             return cal_res
         # automated 12.88 buffer solution dection
-        elif (rawEC > _raw_1288-_raw_1288_offset and rawEC < _raw_1288+_raw_1288_offset):
-            compECsolution = 12.88*(1.0+0.0185*(temperature-25.0))
-            KValueTemp = self.KvalueTempCalculation(compECsolution, voltage)
-            print(">>>Buffer Solution:12.88ms/cm")
-            f = open('%secdata.txt' % TXT_FILE_PATH, 'r+')
-            flist = f.readlines()
-            flist[1] = 'kvalueHigh=' + str(KValueTemp) + '\n'
-            f = open('%secdata.txt' % TXT_FILE_PATH, 'w+')
-            f.writelines(flist)
-            f.close()
-            status_msg = ">>>EC:12.88ms/cm Calibration completed<<<"
-            print(status_msg)
-            time.sleep(5.0)
-            cal_res = {'status': 1288,
-                       'kvalue': KValueTemp,
-                       'status_message': status_msg}
-            return cal_res
+        # elif (rawEC > _raw_1288-_raw_1288_offset and rawEC < _raw_1288+_raw_1288_offset):
+        #     compECsolution = 12.88*(1.0+0.0185*(temperature-25.0))
+        #     KValueTemp = self.KvalueTempCalculation(compECsolution, voltage)
+        #     print(">>>Buffer Solution:12.88ms/cm")
+        #     f = open('%secdata.txt' % TXT_FILE_PATH, 'r+')
+        #     flist = f.readlines()
+        #     flist[1] = 'kvalueHigh=' + str(KValueTemp) + '\n'
+        #     f = open('%secdata.txt' % TXT_FILE_PATH, 'w+')
+        #     f.writelines(flist)
+        #     f.close()
+        #     status_msg = ">>>EC:12.88ms/cm Calibration completed<<<"
+        #     print(status_msg)
+        #     time.sleep(5.0)
+        #     cal_res = {'status': 1288,
+        #                'kvalue': KValueTemp,
+        #                'status_message': status_msg}
+        #     return cal_res
         else:
             status_msg = ">>>Buffer Solution Error, EC raw: %.3f, Try Again<<<" % rawEC
             print(status_msg)
