@@ -67,7 +67,7 @@ class GreenPonik_EC():
         # else:
         print(">>>interpolation of k")
         # a = (Y2-Y1)/(X2-X1)
-        slope = (_kvalueHigh+_kvalueLow) / (2.76-1.413)
+        slope = (_kvalueHigh-_kvalueLow) / (2.76-1.413)
         print(">>>slope: %.5f" % slope)
         # b = Y1 - (a*X1)
         intercept = _kvalueLow - (slope*1.413)
