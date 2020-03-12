@@ -58,13 +58,6 @@ class GreenPonik_EC():
         print(">>>current voltage is: %.3f mV" % voltage)
         rawEC = 1000*voltage/820.0/200.0
         print(">>>current rawEC is: %.3f" % rawEC)
-        # valueTemp = rawEC * _kvalue
-        # print(">>>valueTemp is: %.3f" % valueTemp)
-        # if(valueTemp > 2.5):
-        #     _kvalue = _kvalueHigh
-        # elif(valueTemp < 2):
-        #     _kvalue = _kvalueLow
-        # else:
         print(">>>interpolation of k")
         # a = (Y2-Y1)/(X2-X1)
         slope = (_kvalueHigh-_kvalueLow) / (2.76-1.413)
