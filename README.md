@@ -220,4 +220,4 @@ Writter by Mickael Lehoux, from [GreenPonik](https://www.greenponik.com), 2019
 based on [GreenPonik_EC_Python](https://github.com/GreenPonik/GreenPonik_EC_Python)
 
 ## support us
-![become a patreon](https://www.patreon.com/bePatron?u=32614023)
+[become a patreon](https://www.patreon.com/bePatron?u=32614023)
