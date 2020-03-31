@@ -218,3 +218,6 @@ if __name__ == "__main__":
 Writter by Mickael Lehoux, from [GreenPonik](https://www.greenponik.com), 2019
 
 based on [GreenPonik_EC_Python](https://github.com/GreenPonik/GreenPonik_EC_Python)
+
+## support us
+<a href="https://www.patreon.com/bePatron?u=32614023" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
