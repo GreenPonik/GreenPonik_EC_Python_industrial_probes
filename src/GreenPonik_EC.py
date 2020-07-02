@@ -49,7 +49,7 @@ class GreenPonik_EC():
                 print("get k value high from txt file: %.3f" % _kvalueHigh)
         except:
             self.reset()
-            pass
+
 
     def readEC(self, voltage, temperature):
         global _kvalueLow
