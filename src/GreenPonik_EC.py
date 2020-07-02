@@ -82,7 +82,7 @@ class GreenPonik_EC():
         if (rawEC > _raw_1413-_raw_1413_offset and rawEC < _raw_1413+_raw_1413_offset):
             compECsolution = 1.413*(1.0+0.0185*(temperature-25.0))
             KValueTemp = self.KvalueTempCalculation(compECsolution, voltage)
-            round(KValueTemp, 2)
+            KValueTemp = round(KValueTemp, 2)
             print(">>>Buffer Solution:1.413us/cm")
             f = open('%secdata.txt' % TXT_FILE_PATH, 'r+')
             flist = f.readlines()
@@ -101,7 +101,7 @@ class GreenPonik_EC():
         elif (rawEC > _raw_276-_raw_276_offset_low and rawEC < _raw_276+_raw_276_offset_high):
             compECsolution = 2.76*(1.0+0.0185*(temperature-25.0))
             KValueTemp = self.KvalueTempCalculation(compECsolution, voltage)
-            round(KValueTemp, 2)
+            KValueTemp = round(KValueTemp, 2)
             print(">>>Buffer Solution:2.76ms/cm")
             f = open('%secdata.txt' % TXT_FILE_PATH, 'r+')
             flist = f.readlines()
